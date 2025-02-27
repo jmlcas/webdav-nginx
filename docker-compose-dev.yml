@@ -1,0 +1,16 @@
+services:
+
+  webdav2:
+    container_name: webdav2
+    restart: unless-stopped
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - WEBDAV_USERS=User1:p4ssw0rd1,User2:p4ssw0rd2
+      - NGINX_CLIENT_MAX_BODY_SIZE=500M
+    ports:
+      - "8888:80"
+    volumes:
+      - ./webdav/public:/var/www/webdav/public
+      - ./webdav/restricted:/var/www/webdav/restricted
